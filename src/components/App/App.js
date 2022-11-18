@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import './reset.css';
 import './App.css';
-
-/* eslint-disable react/prefer-stateless-function */
+import CV from '../CV/CV';
 
 export default class App extends Component {
   render() {
-    return <h1>Hello</h1>;
+    return (
+      <div className="app">
+        <CV />
+      </div>
+    );
   }
 }

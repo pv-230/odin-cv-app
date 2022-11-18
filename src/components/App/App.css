@@ -1,0 +1,18 @@
+:root {
+  --app-bg-color-white: #eee;
+  --app-bg-color-gold: #f1da8d;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  overflow: auto;
+  background-image: linear-gradient(
+    to bottom right,
+    var(--app-bg-color-white),
+    var(--app-bg-color-gold)
+  );
+}
