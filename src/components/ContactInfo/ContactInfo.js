@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import './ContactInfo.css';
+import ContactInfoForm from '../ContactInfoForm/ContactInfoForm';
 
 export default class ContactInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstname: '',
-      lastname: '',
+      firstName: '',
+      lastName: '',
       email: '',
       phone: '',
+      isEditing: true,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -20,65 +22,24 @@ export default class ContactInfo extends Component {
   }
 
   render() {
-    const { firstname, lastname, email, phone } = this.state;
+    const { firstName, lastName, email, phone, isEditing } = this.state;
 
     return (
       <div className="contact-info">
-        <h2 className="contact-info__title">Contact Information</h2>
-        <form className="contact-info__form">
-          <div className="firstname-info">
-            <label className="firstname-info__label" htmlFor="firstname-info__input">
-              First name:
-              <input
-                id="firstname-info__input"
-                name="firstname"
-                type="text"
-                value={firstname}
-                required
-                onChange={this.handleChange}
-              />
-            </label>
-          </div>
-          <div className="lastname-info">
-            <label className="lastname-info__label" htmlFor="lastname-info__input">
-              Last name:
-              <input
-                id="lastname-info__input"
-                name="lastname"
-                type="text"
-                value={lastname}
-                required
-                onChange={this.handleChange}
-              />
-            </label>
-          </div>
-          <div className="email-info">
-            <label className="email-info__label" htmlFor="email-info__input">
-              Email:
-              <input
-                id="email-info__input"
-                name="email"
-                type="email"
-                value={email}
-                required
-                onChange={this.handleChange}
-              />
-            </label>
-          </div>
-          <div className="phone-info">
-            <label className="phone-info__label" htmlFor="phone-info__input">
-              Phone:
-              <input
-                id="phone-info__input"
-                name="phone"
-                type="tel"
-                value={phone}
-                required
-                onChange={this.handleChange}
-              />
-            </label>
-          </div>
-        </form>
+        <div className="contact-info__title-bar">
+          <h2 className="contact-info__title">Contact Information</h2>
+          <button className="contact-info__update-btn" type="button">
+            {isEditing ? 'Save' : 'Edit'}
+          </button>
+        </div>
+
+        <ContactInfoForm
+          firstName={firstName}
+          lastName={lastName}
+          email={email}
+          phone={phone}
+          handleChange={this.handleChange}
+        />
       </div>
     );
   }

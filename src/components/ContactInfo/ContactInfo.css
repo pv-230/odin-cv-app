@@ -1,3 +1,7 @@
+:root {
+  --input-focus-color: #3a7acc;
+}
+
 .contact-info {
   display: flex;
   flex-direction: column;
@@ -6,24 +10,16 @@
   gap: 10px;
 }
 
-.contact-info__form {
-  display: grid;
-  grid-template-columns: repeat(2, 20ch);
-  gap: 10px;
-  padding: 10px;
-}
+/* Title bar */
 
-.firstname-info__label,
-.lastname-info__label,
-.email-info__label,
-.phone-info__label {
+.contact-info__title-bar {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.contact-info__title {
+  justify-content: space-between;
   width: 100%;
   border-bottom: 1px solid gray;
   padding-bottom: 5px;
+}
+
+.contact-info__title {
+  font-size: 1.5rem;
 }
