@@ -10,3 +10,21 @@
   background-color: var(--cv-bg-color);
   border-radius: 10px;
 }
+
+/* Default styling */
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+input {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+input:focus {
+  outline: 2px solid var(--input-focus-color);
+}
