@@ -1,0 +1,29 @@
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-info__form {
+  display: grid;
+  grid-template-columns: repeat(2, 20ch);
+  gap: 10px;
+  padding: 10px;
+}
+
+.firstname-info__label,
+.lastname-info__label,
+.email-info__label,
+.phone-info__label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-info__title {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  padding-bottom: 5px;
+}

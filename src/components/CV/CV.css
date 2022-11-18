@@ -5,11 +5,7 @@
 .cv {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 20px;
-  width: 400px;
-  height: 500px;
   padding: 20px;
   background-color: var(--cv-bg-color);
   border-radius: 10px;
