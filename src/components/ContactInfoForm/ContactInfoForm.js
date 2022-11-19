@@ -4,14 +4,44 @@ import './ContactInfoForm.css';
 
 export default class ContactInfoForm extends Component {
   render() {
-    const { firstName, lastName, email, phone, handleChange } = this.props;
+    const { firstName, lastName, email, phone, handleChange, inputErrors } = this.props;
+    let firstNameClasses = 'contact-info__input_first-name';
+    let lastNameClasses = 'contact-info__input_last-name';
+    let emailClasses = 'contact-info__input_email';
+    let phoneClasses = 'contact-info__input_phone';
+
+    Object.keys(inputErrors).forEach((input) => {
+      if (Object.values(inputErrors[input]).find((value) => value)) {
+        // Adds error styling to any input field with an error
+        if (input === 'firstName') {
+          firstNameClasses += ' contact-info__input_error';
+        } else if (input === 'lastName') {
+          lastNameClasses += ' contact-info__input_error';
+        } else if (input === 'email') {
+          emailClasses += ' contact-info__input_error';
+        } else if (input === 'phone') {
+          phoneClasses += ' contact-info__input_error';
+        }
+      } else {
+        // eslint-disable-next-line no-lonely-if
+        if (input === 'firstName') {
+          firstNameClasses.replace(' contact-info__input_error', '');
+        } else if (input === 'lastName') {
+          lastNameClasses.replace(' contact-info__input_error', '');
+        } else if (input === 'email') {
+          emailClasses.replace(' contact-info__input_error', '');
+        } else if (input === 'phone') {
+          phoneClasses.replace(' contact-info__input_error', '');
+        }
+      }
+    });
 
     return (
       <form className="contact-info__form">
-        <label htmlFor="contact-info__first-name-input">
+        <label>
           First name:
           <input
-            id="contact-info__first-name-input"
+            className={firstNameClasses}
             name="firstName"
             type="text"
             value={firstName}
@@ -21,10 +51,10 @@ export default class ContactInfoForm extends Component {
           />
         </label>
 
-        <label htmlFor="contact-info__last-name-input">
+        <label>
           Last name:
           <input
-            id="contact-info__last-name-input"
+            className={lastNameClasses}
             name="lastName"
             type="text"
             value={lastName}
@@ -34,10 +64,10 @@ export default class ContactInfoForm extends Component {
           />
         </label>
 
-        <label htmlFor="contact-info__email-input">
+        <label>
           Email:
           <input
-            id="contact-info__email-input"
+            className={emailClasses}
             name="email"
             type="email"
             value={email}
@@ -47,10 +77,10 @@ export default class ContactInfoForm extends Component {
           />
         </label>
 
-        <label htmlFor="contact-info__phone-input">
+        <label>
           Phone:
           <input
-            id="contact-info__phone-input"
+            className={phoneClasses}
             name="phone"
             type="tel"
             value={phone}
@@ -70,4 +100,18 @@ ContactInfoForm.propTypes = {
   email: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
+  inputErrors: PropTypes.shape({
+    firstName: PropTypes.shape({
+      isEmpty: PropTypes.bool,
+    }),
+    lastName: PropTypes.shape({
+      isEmpty: PropTypes.bool,
+    }),
+    email: PropTypes.shape({
+      isEmpty: PropTypes.bool,
+    }),
+    phone: PropTypes.shape({
+      isEmpty: PropTypes.bool,
+    }),
+  }).isRequired,
 };

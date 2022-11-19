@@ -4,3 +4,7 @@
   gap: 10px;
   padding: 10px;
 }
+
+.contact-info__input_error {
+  outline: 2px solid red;
+}
