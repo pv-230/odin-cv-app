@@ -15,6 +15,7 @@
 .contact-info__title-bar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   border-bottom: 1px solid gray;
   padding-bottom: 5px;

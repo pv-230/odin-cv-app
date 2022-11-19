@@ -28,7 +28,7 @@ export default class ContactInfo extends Component {
       <div className="contact-info">
         <div className="contact-info__title-bar">
           <h2 className="contact-info__title">Contact Information</h2>
-          <button className="contact-info__update-btn" type="button">
+          <button className="update-btn" type="button">
             {isEditing ? 'Save' : 'Edit'}
           </button>
         </div>

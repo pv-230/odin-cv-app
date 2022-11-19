@@ -1,5 +1,8 @@
 :root {
   --cv-bg-color: rgba(164, 168, 187, 0.5);
+  --input-bg-color: #eee;
+  --button-bg-color: #eee;
+  --button-hover-color: #8dc4ff;
 }
 
 .cv {
@@ -9,6 +12,7 @@
   padding: 20px;
   background-color: var(--cv-bg-color);
   border-radius: 10px;
+  font-family: sans-serif;
 }
 
 /* Default styling */
@@ -23,8 +27,21 @@ input {
   border: 1px solid gray;
   border-radius: 5px;
   padding: 5px;
+  background-color: var(--input-bg-color);
 }
 
 input:focus {
   outline: 2px solid var(--input-focus-color);
+}
+
+.update-btn {
+  padding: 5px 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: var(--button-bg-color);
+}
+
+.update-btn:hover {
+  cursor: pointer;
+  background-color: var(--button-hover-color);
 }
