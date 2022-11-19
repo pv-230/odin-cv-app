@@ -54,17 +54,31 @@ export default class ContactInfo extends Component {
    */
   handleUpdateBtn() {
     const inputs = ['firstName', 'lastName', 'email', 'phone'];
+    let hasErrors = false;
 
-    // Checks for empty input fields and updates error state
     this.setState((prevState) => {
-      const { inputErrors } = prevState;
-      const inputErrorsCopy = { ...inputErrors };
-      inputs.forEach((input) => {
-        if (!prevState[input]) {
-          inputErrorsCopy[input].isEmpty = !prevState[input];
+      let { isEditing } = prevState;
+
+      if (isEditing) {
+        const { inputErrors } = prevState;
+
+        // Checks for any errors with the input fields
+        inputs.forEach((input) => {
+          // Checks for empty input fields
+          if (!prevState[input]) {
+            inputErrors[input].isEmpty = !prevState[input];
+            hasErrors = true;
+          }
+        });
+
+        if (!hasErrors) {
+          isEditing = false;
         }
-      });
-      return { inputErrorsCopy };
+
+        return { isEditing, inputErrors };
+      }
+
+      return { isEditing: !isEditing };
     });
   }
 
@@ -73,21 +87,45 @@ export default class ContactInfo extends Component {
 
     return (
       <div className="contact-info">
+        {/* Title bar */}
         <div className="contact-info__title-bar">
-          <h2 className="contact-info__title">Contact Information</h2>
+          <span className="contact-info__title">Contact Information</span>
           <button className="update-btn" type="button" onClick={this.handleUpdateBtn}>
             {isEditing ? 'Save' : 'Edit'}
           </button>
         </div>
 
-        <ContactInfoForm
-          firstName={firstName}
-          lastName={lastName}
-          email={email}
-          phone={phone}
-          handleChange={this.handleChange}
-          inputErrors={inputErrors}
-        />
+        {isEditing ? (
+          /* Form for editing contact info */
+          <ContactInfoForm
+            firstName={firstName}
+            lastName={lastName}
+            email={email}
+            phone={phone}
+            handleChange={this.handleChange}
+            inputErrors={inputErrors}
+          />
+        ) : (
+          /* Read-only contact info */
+          <div className="contact-info__info-display">
+            <div className="contact-info__text-group">
+              <span className="contact-info__text-title">First name:</span>
+              <span className="contact-info__text-content">{firstName}</span>
+            </div>
+            <div className="contact-info__text-group">
+              <span className="contact-info__text-title">Last name:</span>
+              <span className="contact-info__text-content">{lastName}</span>
+            </div>
+            <div className="contact-info__text-group">
+              <span className="contact-info__text-title">Email:</span>
+              <span className="contact-info__text-content">{email}</span>
+            </div>
+            <div className="contact-info__text-group">
+              <span className="contact-info__text-title">Phone:</span>
+              <span className="contact-info__text-content">{phone}</span>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
