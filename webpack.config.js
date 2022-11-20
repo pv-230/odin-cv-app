@@ -6,7 +6,10 @@ module.exports = {
     clean: true,
   },
   mode: 'development',
-  devtool: 'eval',
+  devtool: 'eval-source-map',
+  performance: {
+    hints: false,
+  },
   module: {
     rules: [
       {
