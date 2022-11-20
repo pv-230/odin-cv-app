@@ -2,6 +2,24 @@ import React, { Component } from 'react';
 import './ContactInfo.css';
 import ContactInfoForm from '../ContactInfoForm/ContactInfoForm';
 
+const FIRST_NAME_ERRORS = {
+  isEmpty: 'First name is required.',
+};
+
+const LAST_NAME_ERRORS = {
+  isEmpty: 'Last name is required.',
+};
+
+const EMAIL_ERRORS = {
+  isEmpty: 'Email is required.',
+  isInvalid: 'Invalid email.',
+};
+
+const PHONE_ERRORS = {
+  isEmpty: 'Phone number is required.',
+  isInvalid: 'Invalid phone number.',
+};
+
 export default class ContactInfo extends Component {
   constructor(props) {
     super(props);
@@ -13,18 +31,10 @@ export default class ContactInfo extends Component {
       isEditing: true,
 
       inputErrors: {
-        firstName: {
-          isEmpty: false,
-        },
-        lastName: {
-          isEmpty: false,
-        },
-        email: {
-          isEmpty: false,
-        },
-        phone: {
-          isEmpty: false,
-        },
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
       },
     };
 
@@ -41,10 +51,7 @@ export default class ContactInfo extends Component {
       [e.target.name]: e.target.value,
       inputErrors: {
         ...prevState.inputErrors,
-        [e.target.name]: {
-          ...prevState.inputErrors[e.target.name],
-          isEmpty: false, // Clears errors for any changed input field
-        },
+        [e.target.name]: '',
       },
     }));
   }
@@ -53,32 +60,39 @@ export default class ContactInfo extends Component {
    * Event handler for the update button (save/edit).
    */
   handleUpdateBtn() {
-    const inputs = ['firstName', 'lastName', 'email', 'phone'];
-    let hasErrors = false;
-
     this.setState((prevState) => {
       let { isEditing } = prevState;
 
-      if (isEditing) {
-        const { inputErrors } = prevState;
-
-        // Checks for any errors with the input fields
-        inputs.forEach((input) => {
-          // Checks for empty input fields
-          if (!prevState[input]) {
-            inputErrors[input].isEmpty = !prevState[input];
-            hasErrors = true;
-          }
-        });
-
-        if (!hasErrors) {
-          isEditing = false;
-        }
-
-        return { isEditing, inputErrors };
+      if (!isEditing) {
+        // Switches to edit mode
+        return { isEditing: !isEditing };
       }
 
-      return { isEditing: !isEditing };
+      const { inputErrors } = prevState;
+      const mustNotBeEmpty = ['firstName', 'lastName', 'email', 'phone'];
+      let hasErrors = false;
+
+      // Checks for empty input fields
+      mustNotBeEmpty.forEach((input) => {
+        if (!prevState[input]) {
+          hasErrors = true;
+          if (input === 'firstName') {
+            inputErrors[input] = FIRST_NAME_ERRORS.isEmpty;
+          } else if (input === 'lastName') {
+            inputErrors[input] = LAST_NAME_ERRORS.isEmpty;
+          } else if (input === 'email') {
+            inputErrors[input] = EMAIL_ERRORS.isEmpty;
+          } else if (input === 'phone') {
+            inputErrors[input] = PHONE_ERRORS.isEmpty;
+          }
+        }
+      });
+
+      if (!hasErrors) {
+        isEditing = false;
+      }
+
+      return { isEditing, inputErrors };
     });
   }
 

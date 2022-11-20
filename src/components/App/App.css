@@ -1,6 +1,9 @@
 :root {
   --app-bg-color-white: #eee;
   --app-bg-color-gold: #f1da8d;
+  --input-bg-color: #eee;
+  --button-bg-color: #eee;
+  --button-hover-color: #8dc4ff;
 }
 
 html {
@@ -29,4 +32,37 @@ body,
     var(--app-bg-color-white),
     var(--app-bg-color-gold)
   );
+}
+
+/* Default styling */
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: var(--input-bg-color);
+}
+
+input:focus-visible {
+  outline: 2px solid var(--input-focus-color);
+}
+
+button {
+  padding: 5px 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: var(--button-bg-color);
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: var(--button-hover-color);
 }

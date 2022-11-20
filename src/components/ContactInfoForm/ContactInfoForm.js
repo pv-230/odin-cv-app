@@ -5,91 +5,92 @@ import './ContactInfoForm.css';
 export default class ContactInfoForm extends Component {
   render() {
     const { firstName, lastName, email, phone, handleChange, inputErrors } = this.props;
-    const inputClass = 'contact-info__input';
-    let firstNameClasses = 'contact-info__input_first-name';
-    let lastNameClasses = 'contact-info__input_last-name';
-    let emailClasses = 'contact-info__input_email';
-    let phoneClasses = 'contact-info__input_phone';
 
-    Object.keys(inputErrors).forEach((input) => {
-      if (Object.values(inputErrors[input]).find((value) => value)) {
-        // Adds error styling to any input field with an error
-        if (input === 'firstName') {
-          firstNameClasses += ' contact-info__input_error';
-        } else if (input === 'lastName') {
-          lastNameClasses += ' contact-info__input_error';
-        } else if (input === 'email') {
-          emailClasses += ' contact-info__input_error';
-        } else if (input === 'phone') {
-          phoneClasses += ' contact-info__input_error';
-        }
-      } else {
-        // eslint-disable-next-line no-lonely-if
-        if (input === 'firstName') {
-          firstNameClasses.replace(' contact-info__input_error', '');
-        } else if (input === 'lastName') {
-          lastNameClasses.replace(' contact-info__input_error', '');
-        } else if (input === 'email') {
-          emailClasses.replace(' contact-info__input_error', '');
-        } else if (input === 'phone') {
-          phoneClasses.replace(' contact-info__input_error', '');
-        }
-      }
-    });
+    const CLASS_NAMES = {
+      firstName: 'contact-info__input contact-info__input_first-name',
+      lastName: 'contact-info__input contact-info__input_email',
+      email: 'contact-info__input contact-info__input_email',
+      phone: 'contact-info__input contact-info__input_phone',
+    };
+
+    if (inputErrors.firstName) CLASS_NAMES.firstName += ' contact-info__input_error';
+    if (inputErrors.lastName) CLASS_NAMES.lastName += ' contact-info__input_error';
+    if (inputErrors.email) CLASS_NAMES.email += ' contact-info__input_error';
+    if (inputErrors.phone) CLASS_NAMES.phone += ' contact-info__input_error';
 
     return (
       <form className="contact-info__form">
-        <label>
-          First name:
-          <input
-            className={`${inputClass} ${firstNameClasses}`}
-            name="firstName"
-            type="text"
-            value={firstName}
-            required
-            onChange={handleChange}
-            autoComplete="off"
-          />
-        </label>
+        <div className="contact-info__wrapper contact-info__wrapper_first-name">
+          <label className="contact-info__label contact-info__label_first-name">
+            First name:
+            <input
+              className={CLASS_NAMES.firstName}
+              name="firstName"
+              type="text"
+              value={firstName}
+              required
+              onChange={handleChange}
+              autoComplete="off"
+            />
+          </label>
+          <div className="contact-info__error contact-info__error_first-name">
+            {inputErrors.firstName || null}
+          </div>
+        </div>
 
-        <label>
-          Last name:
-          <input
-            className={`${inputClass} ${lastNameClasses}`}
-            name="lastName"
-            type="text"
-            value={lastName}
-            required
-            onChange={handleChange}
-            autoComplete="off"
-          />
-        </label>
+        <div className="contact-info__wrapper contact-info__wrapper_last-name">
+          <label className="contact-info__label contact-info__label_last-name">
+            Last name:
+            <input
+              className={CLASS_NAMES.lastName}
+              name="lastName"
+              type="text"
+              value={lastName}
+              required
+              onChange={handleChange}
+              autoComplete="off"
+            />
+          </label>
+          <div className="contact-info__error contact-info__error_last-name">
+            {inputErrors.lastName || null}
+          </div>
+        </div>
 
-        <label>
-          Email:
-          <input
-            className={`${inputClass} ${emailClasses}`}
-            name="email"
-            type="email"
-            value={email}
-            required
-            onChange={handleChange}
-            autoComplete="off"
-          />
-        </label>
+        <div className="contact-info__wrapper contact-info__wrapper_email">
+          <label className="contact-info__label contact-info__label_email">
+            Email:
+            <input
+              className={CLASS_NAMES.email}
+              name="email"
+              type="email"
+              value={email}
+              required
+              onChange={handleChange}
+              autoComplete="off"
+            />
+          </label>
+          <div className="contact-info__error contact-info__error_email">
+            {inputErrors.email || null}
+          </div>
+        </div>
 
-        <label>
-          Phone:
-          <input
-            className={`${inputClass} ${phoneClasses}`}
-            name="phone"
-            type="tel"
-            value={phone}
-            required
-            onChange={handleChange}
-            autoComplete="off"
-          />
-        </label>
+        <div className="contact-info__wrapper contact-info__wrapper_phone">
+          <label className="contact-info__label contact-info__label_phone">
+            Phone:
+            <input
+              className={CLASS_NAMES.phone}
+              name="phone"
+              type="tel"
+              value={phone}
+              required
+              onChange={handleChange}
+              autoComplete="off"
+            />
+          </label>
+          <div className="contact-info__error contact-info__error_phone">
+            {inputErrors.phone || null}
+          </div>
+        </div>
       </form>
     );
   }
@@ -102,17 +103,9 @@ ContactInfoForm.propTypes = {
   phone: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
   inputErrors: PropTypes.shape({
-    firstName: PropTypes.shape({
-      isEmpty: PropTypes.bool,
-    }),
-    lastName: PropTypes.shape({
-      isEmpty: PropTypes.bool,
-    }),
-    email: PropTypes.shape({
-      isEmpty: PropTypes.bool,
-    }),
-    phone: PropTypes.shape({
-      isEmpty: PropTypes.bool,
-    }),
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    email: PropTypes.string,
+    phone: PropTypes.string,
   }).isRequired,
 };
