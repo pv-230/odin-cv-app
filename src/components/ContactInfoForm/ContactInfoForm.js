@@ -5,6 +5,7 @@ import './ContactInfoForm.css';
 export default class ContactInfoForm extends Component {
   render() {
     const { firstName, lastName, email, phone, handleChange, inputErrors } = this.props;
+    const inputClass = 'contact-info__input';
     let firstNameClasses = 'contact-info__input_first-name';
     let lastNameClasses = 'contact-info__input_last-name';
     let emailClasses = 'contact-info__input_email';
@@ -41,7 +42,7 @@ export default class ContactInfoForm extends Component {
         <label>
           First name:
           <input
-            className={firstNameClasses}
+            className={`${inputClass} ${firstNameClasses}`}
             name="firstName"
             type="text"
             value={firstName}
@@ -54,7 +55,7 @@ export default class ContactInfoForm extends Component {
         <label>
           Last name:
           <input
-            className={lastNameClasses}
+            className={`${inputClass} ${lastNameClasses}`}
             name="lastName"
             type="text"
             value={lastName}
@@ -67,7 +68,7 @@ export default class ContactInfoForm extends Component {
         <label>
           Email:
           <input
-            className={emailClasses}
+            className={`${inputClass} ${emailClasses}`}
             name="email"
             type="email"
             value={email}
@@ -80,7 +81,7 @@ export default class ContactInfoForm extends Component {
         <label>
           Phone:
           <input
-            className={phoneClasses}
+            className={`${inputClass} ${phoneClasses}`}
             name="phone"
             type="tel"
             value={phone}

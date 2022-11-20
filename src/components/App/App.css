@@ -3,13 +3,27 @@
   --app-bg-color-gold: #f1da8d;
 }
 
-.app {
+html {
+  min-height: 100%;
   display: flex;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+body,
+#root {
+  display: flex;
+  flex: 1;
+}
+
+.app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  min-height: 100vh;
-  overflow: auto;
   background-image: linear-gradient(
     to bottom right,
     var(--app-bg-color-white),
