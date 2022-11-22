@@ -1,7 +1,3 @@
-:root {
-  --input-focus-color: #3a7acc;
-}
-
 .contact-info {
   display: flex;
   flex-direction: column;
@@ -16,11 +12,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
   width: 100%;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 5px;
 }
 
 .contact-info__title {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+}
+
+.contact-info__update-btn {
+  width: 70px;
 }

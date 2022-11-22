@@ -28,9 +28,9 @@ export default class ContactInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
+      firstName: 'a',
+      lastName: 'a',
+      email: 'a@a.a',
       phone: '',
       isEditing: true,
 
@@ -126,42 +126,25 @@ export default class ContactInfo extends Component {
         {/* Title bar */}
         <div className="contact-info__title-bar">
           <span className="contact-info__title">Contact Information</span>
-          <button className="update-btn" type="button" onClick={this.handleUpdateBtn}>
+          <button
+            className="contact-info__update-btn"
+            type="button"
+            onClick={this.handleUpdateBtn}
+          >
             {isEditing ? 'Save' : 'Edit'}
           </button>
         </div>
 
-        {isEditing ? (
-          /* Form for editing contact info */
-          <ContactInfoForm
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
-            phone={phone}
-            handleChange={this.handleChange}
-            inputErrors={inputErrors}
-          />
-        ) : (
-          /* Read-only contact info */
-          <div className="contact-info__info-display">
-            <div className="contact-info__text-group">
-              <span className="contact-info__text-title">First name:</span>
-              <span className="contact-info__text-content">{firstName}</span>
-            </div>
-            <div className="contact-info__text-group">
-              <span className="contact-info__text-title">Last name:</span>
-              <span className="contact-info__text-content">{lastName}</span>
-            </div>
-            <div className="contact-info__text-group">
-              <span className="contact-info__text-title">Email:</span>
-              <span className="contact-info__text-content">{email}</span>
-            </div>
-            <div className="contact-info__text-group">
-              <span className="contact-info__text-title">Phone:</span>
-              <span className="contact-info__text-content">{phone}</span>
-            </div>
-          </div>
-        )}
+        {/* Form for editing contact info */}
+        <ContactInfoForm
+          firstName={firstName}
+          lastName={lastName}
+          email={email}
+          phone={phone}
+          handleChange={this.handleChange}
+          isEditing={isEditing}
+          inputErrors={inputErrors}
+        />
       </div>
     );
   }

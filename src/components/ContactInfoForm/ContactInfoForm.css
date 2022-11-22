@@ -32,10 +32,6 @@
   grid-area: phone;
 }
 
-.contact-info__input {
-  width: 100%;
-}
-
 .contact-info__error {
   width: 100%;
   min-height: 1rem;
@@ -48,5 +44,17 @@
 }
 
 .contact-info__optional-text {
-  font-style: italic;
+  font-weight: 100;
+}
+
+/* Read-only contact info */
+
+.contact-info__text-content {
+  width: 100%;
+  height: var(--input-height);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: var(--input-padding);
+  color: var(--font-color);
+  font-weight: 300;
 }
