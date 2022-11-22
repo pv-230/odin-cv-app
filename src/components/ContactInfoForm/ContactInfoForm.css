@@ -46,3 +46,7 @@
 .contact-info__input_error {
   outline: 2px solid crimson;
 }
+
+.contact-info__optional-text {
+  font-style: italic;
+}

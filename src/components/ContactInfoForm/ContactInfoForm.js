@@ -76,7 +76,9 @@ export default class ContactInfoForm extends Component {
 
         <div className="contact-info__wrapper contact-info__wrapper_phone">
           <label className="contact-info__label contact-info__label_phone">
-            Phone:
+            <div>
+              Phone - <span className="contact-info__optional-text">Optional</span>
+            </div>
             <input
               className={classNames.phone}
               name="phone"
@@ -85,6 +87,7 @@ export default class ContactInfoForm extends Component {
               required
               onChange={handleChange}
               autoComplete="off"
+              placeholder="123-456-7890"
             />
           </label>
           <div className="contact-info__error contact-info__error_phone">

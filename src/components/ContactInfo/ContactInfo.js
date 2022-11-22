@@ -3,22 +3,26 @@ import './ContactInfo.css';
 import ContactInfoForm from '../ContactInfoForm/ContactInfoForm';
 
 const FIRST_NAME_ERRORS = Object.freeze({
-  isEmpty: 'First name is required.',
+  isEmpty: 'First name is required',
 });
 
 const LAST_NAME_ERRORS = Object.freeze({
-  isEmpty: 'Last name is required.',
+  isEmpty: 'Last name is required',
 });
 
 const EMAIL_ERRORS = Object.freeze({
-  isEmpty: 'Email is required.',
-  isInvalid: 'Invalid email.',
+  isEmpty: 'Email is required',
+  isInvalid: 'Invalid email',
 });
 
 const PHONE_ERRORS = Object.freeze({
-  isEmpty: 'Phone number is required.',
-  isInvalid: 'Invalid phone number.',
+  isInvalid: 'Invalid format (Example: 123-456-7890)',
 });
+
+const PHONE_REGEX = /(\d{3})-\d{3}-\d{4}/;
+
+const EMAIL_REGEX =
+  /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
 export default class ContactInfo extends Component {
   constructor(props) {
@@ -64,26 +68,44 @@ export default class ContactInfo extends Component {
       let { isEditing } = prevState;
 
       if (!isEditing) {
-        // Switches to edit mode
+        // Switch to edit mode
         return { isEditing: !isEditing };
       }
 
-      const { inputErrors } = prevState;
-      const mustNotBeEmpty = ['firstName', 'lastName', 'email', 'phone'];
+      // Reaching this point means save button was clicked
+      // Set up input validation
+      const { firstName, lastName, email, phone, inputErrors } = prevState;
+      const inputs = Object.entries({ firstName, lastName, email, phone });
       let hasErrors = false;
 
-      // Checks for empty input fields
-      mustNotBeEmpty.forEach((input) => {
-        if (!prevState[input]) {
-          hasErrors = true;
-          if (input === 'firstName') {
+      // Input validation begins
+      inputs.forEach(([input, value]) => {
+        if (input === 'firstName') {
+          // First name validation
+          if (!value) {
             inputErrors[input] = FIRST_NAME_ERRORS.isEmpty;
-          } else if (input === 'lastName') {
+            hasErrors = true;
+          }
+        } else if (input === 'lastName') {
+          // Last name validation
+          if (!value) {
             inputErrors[input] = LAST_NAME_ERRORS.isEmpty;
-          } else if (input === 'email') {
+            hasErrors = true;
+          }
+        } else if (input === 'email') {
+          // Email validation
+          if (!value) {
             inputErrors[input] = EMAIL_ERRORS.isEmpty;
-          } else if (input === 'phone') {
-            inputErrors[input] = PHONE_ERRORS.isEmpty;
+            hasErrors = true;
+          } else if (!EMAIL_REGEX.test(value)) {
+            inputErrors[input] = EMAIL_ERRORS.isInvalid;
+            hasErrors = true;
+          }
+        } else if (input === 'phone') {
+          // Phone validation
+          if (value && !PHONE_REGEX.test(value)) {
+            inputErrors[input] = PHONE_ERRORS.isInvalid;
+            hasErrors = true;
           }
         }
       });
