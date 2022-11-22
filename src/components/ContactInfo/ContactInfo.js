@@ -2,23 +2,23 @@ import React, { Component } from 'react';
 import './ContactInfo.css';
 import ContactInfoForm from '../ContactInfoForm/ContactInfoForm';
 
-const FIRST_NAME_ERRORS = {
+const FIRST_NAME_ERRORS = Object.freeze({
   isEmpty: 'First name is required.',
-};
+});
 
-const LAST_NAME_ERRORS = {
+const LAST_NAME_ERRORS = Object.freeze({
   isEmpty: 'Last name is required.',
-};
+});
 
-const EMAIL_ERRORS = {
+const EMAIL_ERRORS = Object.freeze({
   isEmpty: 'Email is required.',
   isInvalid: 'Invalid email.',
-};
+});
 
-const PHONE_ERRORS = {
+const PHONE_ERRORS = Object.freeze({
   isEmpty: 'Phone number is required.',
   isInvalid: 'Invalid phone number.',
-};
+});
 
 export default class ContactInfo extends Component {
   constructor(props) {

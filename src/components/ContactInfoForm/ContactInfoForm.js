@@ -6,17 +6,17 @@ export default class ContactInfoForm extends Component {
   render() {
     const { firstName, lastName, email, phone, handleChange, inputErrors } = this.props;
 
-    const CLASS_NAMES = {
+    const classNames = {
       firstName: 'contact-info__input contact-info__input_first-name',
       lastName: 'contact-info__input contact-info__input_email',
       email: 'contact-info__input contact-info__input_email',
       phone: 'contact-info__input contact-info__input_phone',
     };
 
-    if (inputErrors.firstName) CLASS_NAMES.firstName += ' contact-info__input_error';
-    if (inputErrors.lastName) CLASS_NAMES.lastName += ' contact-info__input_error';
-    if (inputErrors.email) CLASS_NAMES.email += ' contact-info__input_error';
-    if (inputErrors.phone) CLASS_NAMES.phone += ' contact-info__input_error';
+    if (inputErrors.firstName) classNames.firstName += ' contact-info__input_error';
+    if (inputErrors.lastName) classNames.lastName += ' contact-info__input_error';
+    if (inputErrors.email) classNames.email += ' contact-info__input_error';
+    if (inputErrors.phone) classNames.phone += ' contact-info__input_error';
 
     return (
       <form className="contact-info__form">
@@ -24,7 +24,7 @@ export default class ContactInfoForm extends Component {
           <label className="contact-info__label contact-info__label_first-name">
             First name:
             <input
-              className={CLASS_NAMES.firstName}
+              className={classNames.firstName}
               name="firstName"
               type="text"
               value={firstName}
@@ -42,7 +42,7 @@ export default class ContactInfoForm extends Component {
           <label className="contact-info__label contact-info__label_last-name">
             Last name:
             <input
-              className={CLASS_NAMES.lastName}
+              className={classNames.lastName}
               name="lastName"
               type="text"
               value={lastName}
@@ -60,7 +60,7 @@ export default class ContactInfoForm extends Component {
           <label className="contact-info__label contact-info__label_email">
             Email:
             <input
-              className={CLASS_NAMES.email}
+              className={classNames.email}
               name="email"
               type="email"
               value={email}
@@ -78,7 +78,7 @@ export default class ContactInfoForm extends Component {
           <label className="contact-info__label contact-info__label_phone">
             Phone:
             <input
-              className={CLASS_NAMES.phone}
+              className={classNames.phone}
               name="phone"
               type="tel"
               value={phone}
