@@ -2,7 +2,7 @@
   --cv-bg-color: rgba(0, 0, 0, 0.75);
   --font-color: #eee;
   --input-bg-color: #d9d9d9;
-  --button-bg-color: var(--input-bg-color);
+  --button-bg-color: #5d8db9;
   --button-font-color: black;
   --button-hover-bg-color: transparent;
   --button-hover-font-color: var(--font-color);
@@ -10,6 +10,7 @@
 
   --input-height: calc(1rem + 12px);
   --input-padding: 5px;
+  --title-bar-font-size: 1.75rem;
 }
 
 .cv {

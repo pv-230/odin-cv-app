@@ -19,7 +19,7 @@
 }
 
 .contact-info__title {
-  font-size: 1.75rem;
+  font-size: var(--title-bar-font-size);
 }
 
 .contact-info__update-btn {
