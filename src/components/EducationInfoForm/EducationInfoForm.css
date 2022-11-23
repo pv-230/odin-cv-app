@@ -1,0 +1,61 @@
+.education-info__form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'school degree'
+    'startDate endDate';
+  gap: 10px;
+  padding: 10px;
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.education-info__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.education-info__wrapper_school {
+  grid-area: school;
+}
+
+.education-info__wrapper_degree {
+  grid-area: degree;
+}
+
+.education-info__wrapper_start-date {
+  grid-area: startDate;
+}
+
+.education-info__wrapper_end-date {
+  grid-area: endDate;
+}
+
+.education-info__error {
+  width: 100%;
+  min-height: 1rem;
+  color: crimson;
+  font-size: 0.8rem;
+}
+
+.education-info__input_error {
+  outline: 2px solid crimson;
+}
+
+.education-info__optional-text {
+  font-weight: 100;
+}
+
+/* Read-only education info */
+
+.education-info__text-content {
+  width: 100%;
+  height: var(--input-height);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: var(--input-padding);
+  color: var(--font-color);
+  font-weight: 300;
+}
