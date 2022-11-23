@@ -65,16 +65,18 @@ export default class ContactInfo extends Component {
    */
   handleUpdateBtn() {
     this.setState((prevState) => {
-      let { isEditing } = prevState;
+      const { isEditing } = prevState;
+      let isEditingCopy = isEditing;
 
-      if (!isEditing) {
+      if (!isEditingCopy) {
         // Switch to edit mode
-        return { isEditing: !isEditing };
+        return { isEditing: !isEditingCopy };
       }
 
       // Reaching this point means save button was clicked
       // Set up input validation
       const { firstName, lastName, email, phone, inputErrors } = prevState;
+      const inputErrorsCopy = { ...inputErrors };
       const inputs = Object.entries({ firstName, lastName, email, phone });
       let hasErrors = false;
 
@@ -83,38 +85,38 @@ export default class ContactInfo extends Component {
         if (input === 'firstName') {
           // First name validation
           if (!value) {
-            inputErrors[input] = FIRST_NAME_ERRORS.isEmpty;
+            inputErrorsCopy[input] = FIRST_NAME_ERRORS.isEmpty;
             hasErrors = true;
           }
         } else if (input === 'lastName') {
           // Last name validation
           if (!value) {
-            inputErrors[input] = LAST_NAME_ERRORS.isEmpty;
+            inputErrorsCopy[input] = LAST_NAME_ERRORS.isEmpty;
             hasErrors = true;
           }
         } else if (input === 'email') {
           // Email validation
           if (!value) {
-            inputErrors[input] = EMAIL_ERRORS.isEmpty;
+            inputErrorsCopy[input] = EMAIL_ERRORS.isEmpty;
             hasErrors = true;
           } else if (!EMAIL_REGEX.test(value)) {
-            inputErrors[input] = EMAIL_ERRORS.isInvalid;
+            inputErrorsCopy[input] = EMAIL_ERRORS.isInvalid;
             hasErrors = true;
           }
         } else if (input === 'phone') {
           // Phone validation
           if (value && !PHONE_REGEX.test(value)) {
-            inputErrors[input] = PHONE_ERRORS.isInvalid;
+            inputErrorsCopy[input] = PHONE_ERRORS.isInvalid;
             hasErrors = true;
           }
         }
       });
 
       if (!hasErrors) {
-        isEditing = false;
+        isEditingCopy = false;
       }
 
-      return { isEditing, inputErrors };
+      return { isEditing: isEditingCopy, inputErrors: inputErrorsCopy };
     });
   }
 
