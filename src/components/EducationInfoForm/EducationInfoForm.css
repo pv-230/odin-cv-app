@@ -27,11 +27,6 @@
   width: 100%;
 }
 
-.education-info__update-btn,
-.education-info__delete-btn {
-  width: 70px;
-}
-
 .education-info__delete-btn {
   background-color: var(--delete-btn-color);
 }

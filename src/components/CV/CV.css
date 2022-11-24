@@ -1,17 +1,7 @@
 :root {
-  --cv-bg-color: rgba(0, 0, 0, 0.5);
-  --font-color: #eee;
-  --input-bg-color: #d9d9d9;
-  --button-bg-color: #503bdf;
-  --button-font-color: black;
-  --button-hover-bg-color: transparent;
-  --button-hover-font-color: var(--font-color);
-  --border-color: gray;
   --add-btn-color: #4c9720;
   --delete-btn-color: #c81963;
 
-  --input-height: calc(1rem + 12px);
-  --input-padding: 5px;
   --title-bar-font-size: 1.75rem;
 }
 
@@ -22,44 +12,7 @@
   width: min(90vw, 600px);
   min-width: 320px;
   padding: 20px;
-  background-color: var(--cv-bg-color);
+  background-color: var(--component-bg-color);
   border-radius: 10px;
-  font-family: Roboto, sans-serif;
-  font-weight: 400;
   color: var(--font-color);
-}
-
-/* Default styling */
-
-label {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
-}
-
-input {
-  width: 100%;
-  height: var(--input-height);
-  border: 1px solid transparent;
-  border-radius: 5px;
-  padding: var(--input-padding);
-  background-color: var(--input-bg-color);
-}
-
-button {
-  padding: 5px 10px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  background-color: var(--button-bg-color);
-  font-weight: 500;
-  color: var(--button-font-color);
-}
-
-button:hover {
-  cursor: pointer;
-  border: 1px solid var(--button-hover-font-color);
-  background-color: var(--button-hover-bg-color);
-  color: var(--button-hover-font-color);
-  transition: background-color 300ms, color 300ms, border 300ms;
 }

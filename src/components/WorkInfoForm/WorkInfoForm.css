@@ -32,11 +32,6 @@
   width: 100%;
 }
 
-.work-info__update-btn,
-.work-info__delete-btn {
-  width: 70px;
-}
-
 .work-info__delete-btn {
   background-color: var(--delete-btn-color);
 }
