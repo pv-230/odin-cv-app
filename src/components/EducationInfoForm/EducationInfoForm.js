@@ -21,11 +21,14 @@ import './EducationInfoForm.css';
 export default class EducationInfoForm extends Component {
   constructor(props) {
     super(props);
+
+    const currentDate = new Date().toISOString();
+
     this.state = {
       school: '',
       degree: '',
-      startDate: Date.now(),
-      endDate: Date.now(),
+      startDate: currentDate.substring(0, currentDate.indexOf('T')),
+      endDate: currentDate.substring(0, currentDate.indexOf('T')),
       isEditing: true,
       inputErrors: {
         school: '',
@@ -34,6 +37,7 @@ export default class EducationInfoForm extends Component {
         endDate: '',
       },
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleDeleteBtn = this.handleDeleteBtn.bind(this);
   }
@@ -172,6 +176,7 @@ export default class EducationInfoForm extends Component {
                 required
                 onChange={this.handleChange}
                 autoComplete="off"
+                min={startDate}
               />
             ) : (
               <span className="education-info__text-content">{endDate}</span>
