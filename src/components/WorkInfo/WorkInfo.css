@@ -1,0 +1,19 @@
+.work-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.work-info__title-bar {
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 5px;
+  font-size: var(--title-bar-font-size);
+}
+
+.work-info__add-btn {
+  width: 100%;
+  margin-top: 10px;
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './CV.css';
 import ContactInfo from '../ContactInfo/ContactInfo';
 import EducationInfo from '../EducationInfo/EducationInfo';
+import WorkInfo from '../WorkInfo/WorkInfo';
 
 export default class CV extends Component {
   render() {
@@ -9,6 +10,7 @@ export default class CV extends Component {
       <div className="cv">
         <ContactInfo />
         <EducationInfo />
+        <WorkInfo />
       </div>
     );
   }
