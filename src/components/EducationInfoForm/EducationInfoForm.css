@@ -78,10 +78,13 @@
 
 .education-info__text-content {
   width: 100%;
-  height: var(--input-height);
+  min-height: var(--input-height);
+  max-height: 5rem;
   border: 1px solid var(--border-color);
   border-radius: 5px;
   padding: var(--input-padding);
   color: var(--font-color);
   font-weight: 300;
+  overflow: auto;
+  word-wrap: break-word;
 }

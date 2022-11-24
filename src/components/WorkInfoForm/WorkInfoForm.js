@@ -196,7 +196,7 @@ export default class WorkInfoForm extends Component {
                 autoComplete="off"
               />
             ) : (
-              <span className="work-info__text-content">{startDate}</span>
+              <span className="work-info__text-content">{new Date(startDate).toDateString()}</span>
             )}
           </label>
           <div className="work-info__error work-info__error_start-date">
@@ -220,7 +220,7 @@ export default class WorkInfoForm extends Component {
                 min={startDate}
               />
             ) : (
-              <span className="work-info__text-content">{endDate}</span>
+              <span className="work-info__text-content">{new Date(endDate).toDateString()}</span>
             )}
           </label>
           <div className="work-info__error work-info__error_end-date">

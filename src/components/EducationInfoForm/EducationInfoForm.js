@@ -191,7 +191,9 @@ export default class EducationInfoForm extends Component {
                 autoComplete="off"
               />
             ) : (
-              <span className="education-info__text-content">{startDate}</span>
+              <span className="education-info__text-content">
+                {new Date(startDate).toDateString()}
+              </span>
             )}
           </label>
           <div className="education-info__error education-info__error_start-date">
@@ -215,7 +217,9 @@ export default class EducationInfoForm extends Component {
                 min={startDate}
               />
             ) : (
-              <span className="education-info__text-content">{endDate}</span>
+              <span className="education-info__text-content">
+                {new Date(endDate).toDateString()}
+              </span>
             )}
           </label>
           <div className="education-info__error education-info__error_end-date">
