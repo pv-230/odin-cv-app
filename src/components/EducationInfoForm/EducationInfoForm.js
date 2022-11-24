@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './EducationInfoForm.css';
 
-const SCHOOL_ERRORS = Object.freeze({
-  isEmpty: 'School name is required',
-});
+// const SCHOOL_ERRORS = Object.freeze({
+//   isEmpty: 'School name is required',
+// });
 
-const DEGREE_ERRORS = Object.freeze({
-  isEmpty: 'Degree name is required',
-});
+// const DEGREE_ERRORS = Object.freeze({
+//   isEmpty: 'Degree name is required',
+// });
 
-const START_DATE_ERRORS = Object.freeze({
-  isEmpty: 'Start date is required',
-});
+// const START_DATE_ERRORS = Object.freeze({
+//   isEmpty: 'Start date is required',
+// });
 
-const END_DATE_ERRORS = Object.freeze({
-  isEmpty: 'End date is required',
-});
+// const END_DATE_ERRORS = Object.freeze({
+//   isEmpty: 'End date is required',
+// });
 
 export default class EducationInfoForm extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ export default class EducationInfoForm extends Component {
       },
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleDeleteBtn = this.handleDeleteBtn.bind(this);
   }
 
   handleChange(e) {
@@ -41,6 +43,11 @@ export default class EducationInfoForm extends Component {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+  }
+
+  handleDeleteBtn() {
+    const { removeEducation, id } = this.props;
+    removeEducation(id);
   }
 
   render() {
@@ -60,6 +67,29 @@ export default class EducationInfoForm extends Component {
 
     return (
       <form className="education-info__form">
+        {/* Form action bar */}
+        <div className="education-info__action-bar">
+          {/* Delete button */}
+          {isEditing ? (
+            <button
+              className="education-info__delete-btn"
+              type="button"
+              onClick={this.handleDeleteBtn}
+            >
+              Delete
+            </button>
+          ) : null}
+
+          {/* Save/edit button */}
+          <button
+            className="education-info__update-btn"
+            type="button"
+            onClick={this.handleUpdateBtn}
+          >
+            {isEditing ? 'Save' : 'Edit'}
+          </button>
+        </div>
+
         {/* School info */}
         <div className="education-info__wrapper education-info__wrapper_school">
           <label className="education-info__label education-info__label_school">
@@ -155,3 +185,8 @@ export default class EducationInfoForm extends Component {
     );
   }
 }
+
+EducationInfoForm.propTypes = {
+  id: PropTypes.string.isRequired,
+  removeEducation: PropTypes.func.isRequired,
+};

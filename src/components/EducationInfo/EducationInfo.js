@@ -9,6 +9,7 @@ export default class EducationInfo extends Component {
       educations: [],
     };
     this.handleAddEducation = this.handleAddEducation.bind(this);
+    this.removeEducation = this.removeEducation.bind(this);
   }
 
   /**
@@ -24,6 +25,13 @@ export default class EducationInfo extends Component {
     });
   }
 
+  removeEducation(id) {
+    this.setState((prevState) => ({
+      ...prevState,
+      educations: prevState.educations.filter((education) => education.id !== id),
+    }));
+  }
+
   render() {
     const { educations } = this.state;
 
@@ -31,7 +39,11 @@ export default class EducationInfo extends Component {
       <div className="education-info">
         <div className="education-info__title-bar">Education</div>
         {educations.map((education) => (
-          <EducationInfoForm key={education.id} />
+          <EducationInfoForm
+            key={education.id}
+            id={education.id}
+            removeEducation={this.removeEducation}
+          />
         ))}
         <button
           className="education-info__add-btn"
