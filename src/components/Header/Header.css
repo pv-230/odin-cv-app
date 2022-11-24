@@ -5,8 +5,6 @@
   background-color: var(--component-bg-color);
   width: 100%;
   padding: 10px 0;
-  position: sticky;
-  top: 0px;
   color: var(--font-color);
 }
 
