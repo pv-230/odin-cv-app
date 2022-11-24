@@ -97,7 +97,7 @@ export default class EducationInfoForm extends Component {
             hasErrors = true;
           }
         } else if (input === 'endDate') {
-          // Phone validation
+          // End date validation
           if (!value) {
             inputErrorsCopy[input] = END_DATE_ERRORS.isEmpty;
             hasErrors = true;
