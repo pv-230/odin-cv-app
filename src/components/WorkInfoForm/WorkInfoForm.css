@@ -2,14 +2,17 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
+    'actionBar actionBar'
     'company position'
     'startDate endDate'
-    'description description'
-    'actionBar actionBar';
+    'description description';
   gap: 10px;
   padding: 10px;
   width: 100%;
-  border-bottom: 1px solid var(--border-color);
+}
+
+.work-info__form:not(.work-info__form:last-of-type) {
+  border-bottom: 2px dotted var(--border-color);
 }
 
 .work-info__add-btn {
@@ -24,7 +27,7 @@
 .work-info__action-bar {
   grid-area: actionBar;
   display: flex;
-  justify-content: center;
+  justify-content: end;
   gap: 10px;
   width: 100%;
 }
@@ -35,7 +38,7 @@
 }
 
 .work-info__delete-btn {
-  background-color: crimson;
+  background-color: var(--delete-btn-color);
 }
 
 /* Input wrappers */
@@ -101,4 +104,5 @@
   color: var(--font-color);
   font-weight: 300;
   overflow: auto;
+  word-wrap: break-word;
 }

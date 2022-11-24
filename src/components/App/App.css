@@ -1,6 +1,7 @@
 :root {
-  --app-bg-color-white: #484848;
-  --app-bg-color-gold: #978e42;
+  --app-bg-color-top: #2d0737;
+  --app-bg-color-mid: #2e0f5f;
+  --app-bg-color-bottom: #1e193c;
 }
 
 html {
@@ -22,7 +23,8 @@ body,
   align-items: center;
   background-image: linear-gradient(
     to bottom right,
-    var(--app-bg-color-white),
-    var(--app-bg-color-gold)
+    var(--app-bg-color-top),
+    var(--app-bg-color-mid),
+    var(--app-bg-color-bottom)
   );
 }
