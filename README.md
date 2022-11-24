@@ -3,10 +3,13 @@ This project is the first React based project in The Odin Project. The CV applic
 
 More information here: https://www.theodinproject.com/lessons/node-path-javascript-cv-application
 
-## Tools used
+## Packages used
 - React
 - Webpack & Babel
 - ESLint
   
 ## Screenshots
+
+![First screenshot](/screenshots/screen1.png?raw=true)
   
+![Second screenshot](/screenshots/screen2.png?raw=true)
