@@ -60,4 +60,5 @@ button:hover {
   border: 1px solid var(--button-hover-font-color);
   background-color: var(--button-hover-bg-color);
   color: var(--button-hover-font-color);
+  transition: background-color 300ms, color 300ms, border 300ms;
 }
