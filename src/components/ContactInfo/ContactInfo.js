@@ -28,9 +28,9 @@ export default class ContactInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: 'a',
-      lastName: 'a',
-      email: 'a@a.a',
+      firstName: '',
+      lastName: '',
+      email: '',
       phone: '',
       isEditing: true,
 

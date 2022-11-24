@@ -11,6 +11,10 @@
   border-bottom: 1px solid var(--border-color);
 }
 
+.education-info__add-btn {
+  background-color: var(--add-btn-color);
+}
+
 /* Action bar */
 .education-info__action-bar {
   grid-area: actionBar;

@@ -7,6 +7,7 @@
   --button-hover-bg-color: transparent;
   --button-hover-font-color: var(--font-color);
   --border-color: gray;
+  --add-btn-color: rgb(76, 151, 32);
 
   --input-height: calc(1rem + 12px);
   --input-padding: 5px;

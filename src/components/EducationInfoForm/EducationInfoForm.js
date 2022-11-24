@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './EducationInfoForm.css';
 
-// const SCHOOL_ERRORS = Object.freeze({
-//   isEmpty: 'School name is required',
-// });
+const SCHOOL_ERRORS = Object.freeze({
+  isEmpty: 'School name is required',
+});
 
-// const DEGREE_ERRORS = Object.freeze({
-//   isEmpty: 'Degree name is required',
-// });
+const DEGREE_ERRORS = Object.freeze({
+  isEmpty: 'Degree name is required',
+});
 
-// const START_DATE_ERRORS = Object.freeze({
-//   isEmpty: 'Start date is required',
-// });
+const START_DATE_ERRORS = Object.freeze({
+  isEmpty: 'Start date is required',
+});
 
-// const END_DATE_ERRORS = Object.freeze({
-//   isEmpty: 'End date is required',
-// });
+const END_DATE_ERRORS = Object.freeze({
+  isEmpty: 'End date is required',
+});
 
 export default class EducationInfoForm extends Component {
   constructor(props) {
@@ -40,18 +40,77 @@ export default class EducationInfoForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleDeleteBtn = this.handleDeleteBtn.bind(this);
+    this.handleUpdateBtn = this.handleUpdateBtn.bind(this);
   }
 
   handleChange(e) {
     this.setState((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
+      inputErrors: {
+        ...prevState.inputErrors,
+        [e.target.name]: '',
+      },
     }));
   }
 
   handleDeleteBtn() {
     const { removeEducation, id } = this.props;
     removeEducation(id);
+  }
+
+  handleUpdateBtn() {
+    this.setState((prevState) => {
+      const { isEditing } = prevState;
+      let isEditingCopy = isEditing;
+
+      if (!isEditingCopy) {
+        // Switch to edit mode
+        return { isEditing: !isEditingCopy };
+      }
+
+      // Reaching this point means save button was clicked
+      // Set up input validation
+      const { school, degree, startDate, endDate, inputErrors } = prevState;
+      const inputErrorsCopy = { ...inputErrors };
+      const inputs = Object.entries({ school, degree, startDate, endDate });
+      let hasErrors = false;
+
+      // Input validation begins
+      inputs.forEach(([input, value]) => {
+        if (input === 'school') {
+          // School name validation
+          if (!value) {
+            inputErrorsCopy[input] = SCHOOL_ERRORS.isEmpty;
+            hasErrors = true;
+          }
+        } else if (input === 'degree') {
+          // Degree name validation
+          if (!value) {
+            inputErrorsCopy[input] = DEGREE_ERRORS.isEmpty;
+            hasErrors = true;
+          }
+        } else if (input === 'startDate') {
+          // Start date validation
+          if (!value) {
+            inputErrorsCopy[input] = START_DATE_ERRORS.isEmpty;
+            hasErrors = true;
+          }
+        } else if (input === 'endDate') {
+          // Phone validation
+          if (!value) {
+            inputErrorsCopy[input] = END_DATE_ERRORS.isEmpty;
+            hasErrors = true;
+          }
+        }
+      });
+
+      if (!hasErrors) {
+        isEditingCopy = false;
+      }
+
+      return { isEditing: isEditingCopy, inputErrors: inputErrorsCopy };
+    });
   }
 
   render() {
@@ -71,29 +130,6 @@ export default class EducationInfoForm extends Component {
 
     return (
       <form className="education-info__form">
-        {/* Form action bar */}
-        <div className="education-info__action-bar">
-          {/* Delete button */}
-          {isEditing ? (
-            <button
-              className="education-info__delete-btn"
-              type="button"
-              onClick={this.handleDeleteBtn}
-            >
-              Delete
-            </button>
-          ) : null}
-
-          {/* Save/edit button */}
-          <button
-            className="education-info__update-btn"
-            type="button"
-            onClick={this.handleUpdateBtn}
-          >
-            {isEditing ? 'Save' : 'Edit'}
-          </button>
-        </div>
-
         {/* School info */}
         <div className="education-info__wrapper education-info__wrapper_school">
           <label className="education-info__label education-info__label_school">
@@ -185,6 +221,29 @@ export default class EducationInfoForm extends Component {
           <div className="education-info__error education-info__error_end-date">
             {inputErrors.endDate || null}
           </div>
+        </div>
+
+        {/* Form action bar */}
+        <div className="education-info__action-bar">
+          {/* Delete button */}
+          {isEditing ? (
+            <button
+              className="education-info__delete-btn"
+              type="button"
+              onClick={this.handleDeleteBtn}
+            >
+              Delete
+            </button>
+          ) : null}
+
+          {/* Save/edit button */}
+          <button
+            className="education-info__update-btn"
+            type="button"
+            onClick={this.handleUpdateBtn}
+          >
+            {isEditing ? 'Save' : 'Edit'}
+          </button>
         </div>
       </form>
     );
