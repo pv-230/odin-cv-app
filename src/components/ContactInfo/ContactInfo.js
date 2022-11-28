@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useCallback } from 'react';
 import './ContactInfo.css';
 import ContactInfoForm from '../ContactInfoForm/ContactInfoForm';
 
@@ -24,130 +24,111 @@ const PHONE_REGEX = /^(\d{3})-\d{3}-\d{4}$/;
 const EMAIL_REGEX =
   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
-export default class ContactInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      isEditing: true,
+export default function ContactInfo() {
+  const [fields, setFields] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+  });
 
-      inputErrors: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-      },
-    };
+  const [isEditing, setIsEditing] = useState(true);
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleUpdateBtn = this.handleUpdateBtn.bind(this);
-  }
+  const [inputErrors, setInputErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+  });
 
   /**
    * Event handler for input field changes.
    * @param {SyntheticEvent} e
    */
-  handleChange(e) {
-    this.setState((prevState) => ({
-      [e.target.name]: e.target.value,
-      inputErrors: {
-        ...prevState.inputErrors,
+  const handleChange = useCallback(
+    (e) => {
+      setFields({
+        ...fields,
+        [e.target.name]: e.target.value,
+      });
+
+      setInputErrors({
+        ...inputErrors,
         [e.target.name]: '',
-      },
-    }));
-  }
+      });
+    },
+    [fields, inputErrors]
+  );
 
   /**
    * Event handler for the update button (save/edit).
    */
-  handleUpdateBtn() {
-    this.setState((prevState) => {
-      const { isEditing } = prevState;
-      let isEditingCopy = isEditing;
+  function handleUpdateBtn() {
+    const newInputErrors = { ...inputErrors };
+    let newIsEditing = isEditing;
+    let hasErrors = false;
 
-      if (!isEditingCopy) {
-        // Switch to edit mode
-        return { isEditing: !isEditingCopy };
-      }
-
-      // Reaching this point means save button was clicked
-      // Set up input validation
-      const { firstName, lastName, email, phone, inputErrors } = prevState;
-      const inputErrorsCopy = { ...inputErrors };
-      const inputs = Object.entries({ firstName, lastName, email, phone });
-      let hasErrors = false;
-
-      // Input validation begins
-      inputs.forEach(([input, value]) => {
-        if (input === 'firstName') {
+    if (isEditing) {
+      Object.entries(fields).forEach(([field, value]) => {
+        if (field === 'firstName') {
           // First name validation
           if (!value) {
-            inputErrorsCopy[input] = FIRST_NAME_ERRORS.isEmpty;
+            newInputErrors[field] = FIRST_NAME_ERRORS.isEmpty;
             hasErrors = true;
           }
-        } else if (input === 'lastName') {
+        } else if (field === 'lastName') {
           // Last name validation
           if (!value) {
-            inputErrorsCopy[input] = LAST_NAME_ERRORS.isEmpty;
+            newInputErrors[field] = LAST_NAME_ERRORS.isEmpty;
             hasErrors = true;
           }
-        } else if (input === 'email') {
+        } else if (field === 'email') {
           // Email validation
           if (!value) {
-            inputErrorsCopy[input] = EMAIL_ERRORS.isEmpty;
+            newInputErrors[field] = EMAIL_ERRORS.isEmpty;
             hasErrors = true;
           } else if (!EMAIL_REGEX.test(value)) {
-            inputErrorsCopy[input] = EMAIL_ERRORS.isInvalid;
+            newInputErrors[field] = EMAIL_ERRORS.isInvalid;
             hasErrors = true;
           }
-        } else if (input === 'phone') {
+        } else if (field === 'phone') {
           // Phone validation
           if (value && !PHONE_REGEX.test(value)) {
-            inputErrorsCopy[input] = PHONE_ERRORS.isInvalid;
+            newInputErrors[field] = PHONE_ERRORS.isInvalid;
             hasErrors = true;
           }
         }
       });
 
-      if (!hasErrors) {
-        isEditingCopy = false;
-      }
+      if (!hasErrors) newIsEditing = false;
+    } else {
+      newIsEditing = true;
+    }
 
-      return { isEditing: isEditingCopy, inputErrors: inputErrorsCopy };
-    });
+    setInputErrors(newInputErrors);
+    setIsEditing(newIsEditing);
   }
 
-  render() {
-    const { firstName, lastName, email, phone, isEditing, inputErrors } = this.state;
-
-    return (
-      <div className="contact-info">
-        {/* Title bar */}
-        <div className="contact-info__title-bar">
-          <span className="contact-info__title">Contact Information</span>
-          <button
-            className="contact-info__update-btn"
-            type="button"
-            onClick={this.handleUpdateBtn}
-          >
-            {isEditing ? 'Save' : 'Edit'}
-          </button>
-        </div>
-
-        {/* Form for editing contact info */}
-        <ContactInfoForm
-          firstName={firstName}
-          lastName={lastName}
-          email={email}
-          phone={phone}
-          handleChange={this.handleChange}
-          isEditing={isEditing}
-          inputErrors={inputErrors}
-        />
+  return (
+    <div className="contact-info">
+      {/* Title bar */}
+      <div className="contact-info__title-bar">
+        <span className="contact-info__title">Contact Information</span>
+        <button className="contact-info__update-btn" type="button" onClick={handleUpdateBtn}>
+          {isEditing ? 'Save' : 'Edit'}
+        </button>
       </div>
-    );
-  }
+
+      {/* Form for editing contact info */}
+      <ContactInfoForm
+        firstName={fields.firstName}
+        lastName={fields.lastName}
+        email={fields.email}
+        phone={fields.phone}
+        handleChange={handleChange}
+        isEditing={isEditing}
+        inputErrors={inputErrors}
+      />
+    </div>
+  );
 }
