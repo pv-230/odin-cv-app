@@ -5,7 +5,6 @@ module.exports = {
   output: {
     clean: true,
   },
-  // mode: 'production',
   mode: 'development',
   devtool: 'eval-source-map',
   performance: {
