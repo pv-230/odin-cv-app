@@ -1,58 +1,42 @@
-import React, { Component } from 'react';
+import React, { useState, useCallback } from 'react';
 import './EducationInfo.css';
 import EducationInfoForm from '../EducationInfoForm/EducationInfoForm';
 
-export default class EducationInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      educations: [],
-    };
-    this.handleAddEducation = this.handleAddEducation.bind(this);
-    this.removeEducation = this.removeEducation.bind(this);
-  }
+export default function EducationInfo() {
+  const [educations, setEducations] = useState([]);
 
   /**
    * Event handler for adding a new education.
    */
-  handleAddEducation() {
-    this.setState((prevState) => {
-      const { educations } = prevState;
-      const newEducation = {
-        id: crypto.randomUUID(),
-      };
-      return { educations: [...educations, newEducation] };
-    });
+  function handleAddEducation() {
+    const newEducation = { id: crypto.randomUUID() };
+    setEducations([...educations, newEducation]);
   }
 
-  removeEducation(id) {
-    this.setState((prevState) => ({
-      ...prevState,
-      educations: prevState.educations.filter((education) => education.id !== id),
-    }));
-  }
+  /**
+   * Event handler for removing an education.
+   */
+  const removeEducation = useCallback(
+    (id) => {
+      const newEducations = educations.filter((education) => education.id !== id);
+      setEducations(newEducations);
+    },
+    [educations]
+  );
 
-  render() {
-    const { educations } = this.state;
-
-    return (
-      <div className="education-info">
-        <div className="education-info__title-bar">Education</div>
-        {educations.map((education) => (
-          <EducationInfoForm
-            key={education.id}
-            id={education.id}
-            removeEducation={this.removeEducation}
-          />
-        ))}
-        <button
-          className="education-info__add-btn"
-          type="button"
-          onClick={this.handleAddEducation}
-        >
-          Add education
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div className="education-info">
+      <div className="education-info__title-bar">Education</div>
+      {educations.map((education) => (
+        <EducationInfoForm
+          key={education.id}
+          id={education.id}
+          removeEducation={removeEducation}
+        />
+      ))}
+      <button className="education-info__add-btn" type="button" onClick={handleAddEducation}>
+        Add education
+      </button>
+    </div>
+  );
 }
